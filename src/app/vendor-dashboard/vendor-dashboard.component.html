@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+
+    <link rel="stylesheet" href="vendor-dashboard.component.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!--<link rel="styleSheet" href="release/ui-grid.min.css"/>-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script src="/release/ui-grid.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <script type="text/javascript">
+      document.body.innerHTML = '';
+  </script>
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0);" target="_self">Vendor Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="javascript:void(0);" (click)="Home()" >Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active"  data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          Your Dashboard!
+        </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="VendorDetails()">
+            View Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width:300px">
+            <div *ngIf="!ViewDetails">
+              <div class="d-flex align-items-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div *ngIf="ViewDetails">
+            <li>First Name : {{viewdet.NAME}}</li>
+            <li>Last Name : {{viewdet.NAME_2}}</li>
+            <li>City of Residence : {{viewdet.CITY}}</li>
+            <li>District : {{viewdet.DISTRICT}}</li>
+            <li>Street : {{viewdet.STREET}}</li>
+            <li>Region : {{viewdet.REGION}}</li>
+            <li>PinCode : {{viewdet.POSTL_CODE}}</li>
+            <li>Telephone Number : {{viewdet.TELEPHONE}}</li>
+            </div>
+          </ul>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" href="javascript:void(0);" (click)="FormDisplay()">View Generated Invoice</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="javascript:void(0);" (click)="logout()">Logout  <i class="bi bi-power"></i></a>
+    </li>
+  </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <div class="sidehead">
+          <h3>Welcome Vendor {{vendorid}}</h3>
+      </div>
+
+      <ul class="sidelist">
+         <!---- <p>CUSTOMER DASHBOARD</p> -->
+         <!--- <li>
+              <a href="javascript:void(0);" (click)="forminit()">Edit Your Details</a>
+          </li> -->
+          <li>
+            <a href="javascript:void(0);" (click)="RFQ()">Request For Quotation</a>
+
+          </li>
+          <li>
+            <a href="javascript:void(0);" (click)="PO()">Purchase Order Details</a>
+         </li>
+         <li>
+          <a href="javascript:void(0);" (click)="GR()">Goods Receipt Details</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="InvoiceDisplay()">Invoice Header Details</a>
+
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="CRED()">Credit Memo Details</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="DEBIT()">Debit Memo Details</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="PAY()">Payments Aging Details</a>
+        </li>
+      </ul>
+
+      <div class="kaar" style="padding-left: 20px; padding-top: 50px;">
+        <div class="abimg">  <!--Single row with two columns for the grid-->
+          <div class="row" id="rowfoot">
+            <div class="col-md text-light" id='textfoot'>
+              <h5 style="padding-top: 12px;" >15 Years Of SAP Excellence,</h5>
+          </div>
+          <div class="col-md">
+                  <img src="assets/logo.png" id='imgfoot' style="width:100px;height: 100px;" class="img-fluid">
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <div *ngIf="ViewHome">
+      <div id="home">
+
+      <section class="p-5" id="learn">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">  <!--Single row with two columns for the grid-->
+                <div class="col-md p-5">
+                    <h3>Accessing Sales and Financial Data made Easier for You!</h3>
+                    <br>
+
+                    <p class="lead text-light">
+                      Our Vendor portal , helps you find your desired business data by fetching it from the SAP ERP
+                      system and provides it to you with seamless web-service interaction. The Vendor dashboard is designed and developed to help the you, the Vendor
+                      to know the complete business transaction in a single window with user-friendly navigations.
+                    </p>
+                <button class="btn btn-light mt-3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="bi bi-chevron-right"></i> Edit Your Details
+                </button>
+
+                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit your details on the Go!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-dark"> <!--Body of the modal - form-->
+                        <p class="lead text-dark">Vendor Details Edit Section</p>
+                        <!--Placing the contents of the Modal in the form-->
+                        <form [formGroup]="editform" (submit)="EditDetails()">
+                            <div class="mb-3">
+                              <label for="first-name" class="col-form-label">First Name:</label>
+                              <input type="text" [(ngModel)]="FirstName" class="form-control" formControlName="FirstName">
+                            </div>
+                            <div class="mb-3">
+                              <label for="last-name" class="col-form-label">Last Name:</label>
+                              <input type="text" [(ngModel)]="LastName" class="form-control" formControlName="LastName">
+                            </div>
+                            <div class="mb-3">
+                              <label for="City" class="col-form-label">City:</label>
+                              <input type="text" [(ngModel)]="City" class="form-control" formControlName="City">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Telephone" class="col-form-label">Telephone:</label>
+                              <input type="text" [(ngModel)]="Telephone" class="form-control" formControlName="Telephone">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Region" class="col-form-label">Region:</label>
+                              <input type="text" [(ngModel)]="Region" class="form-control" formControlName="Region">
+                            </div>
+                            <div class="mb-3">
+                              <label for="District" class="col-form-label">District:</label>
+                              <input type="text" [(ngModel)]="District" class="form-control" formControlName="District">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Country" class="col-form-label">Country:</label>
+                              <input type="text" [(ngModel)]="Country" class="form-control" formControlName="Country">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Street" class="col-form-label">Street:</label>
+                              <input type="text" [(ngModel)]="Street" class="form-control" formControlName="Street">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Postal Code" class="col-form-label">Postal Code:</label>
+                              <input type="text" [(ngModel)]="PostalCode" class="form-control" formControlName="PostalCode">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-md" style="padding-left: 200px;">
+                  <img src="assets/AK0.webp" class="img-fluid" alt="" style="width: 450px; height: 400px;">
+              </div>
+            </div>
+        </div>
+
+    </section>
+    <div class="usability " style="background-color:rgb(255, 140, 0); width: 100%; padding:50px ;">
+      <h1 class="text-center text-light">Functionalities We Provide <i class="bi bi-lightbulb-fill align-middle"></i></h1>
+      <br>
+      <p class="text-center p-4 text-light" style="font-size: large;">
+        The Functional Motive of our Vendor Portal is to provide the functionalities of Material Management
+        (MM) and Finance (FI) module accessible to the vendor.Our Portal is to be designed for maintaining the data of all the
+        vendors carrying out business with the organization.Our Vendor Portal enables vendors to access and
+        view the complete transaction between the company and vendor.
+      </p>
+      </div>
+
+
+      <div class="FunctionalCards">
+        <br>
+      <h1 class="text-center">Vendor Sales Data</h1>
+      <br>
+      <p class="text-dark p-4" style="width:100%; font-size: x-large;">The Vendor Dashboard is designed and developed to have the end-to-end
+        transactions between the Vendor and the company. This page is designed to have complete sales data belonging to that Vendor.</p>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <a target="_blank" (click)="RFQ()">
+                  <div class="card-body" style="background-color:darkred">
+                    <h5 class="card-title text-light text-center">Request for Quotation</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">A Request for Quotation contains details about goods or services, quantity, date of delivery, and date of bid
+                      on which it is to be submitted.</p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <a target="_blank" (click)="PO()">
+                  <div class="card-body" style="background-color:darkred">
+                    <h5 class="card-title text-light text-center">Purchase Order Data</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">A Purchase Order will be generated once the RFQ is accepted by the customer,which includes material details, quantity and
+                      other related details. </p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <BR>
+              <BR>
+                <div class="row justify-content-center">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <a target="_blank" (click)="GR()">
+                      <div class="card-body" style="background-color:darkred">
+                        <h5 class="card-title text-light text-center">Goods Receipt Information</h5>
+                        <br>
+                        <p class="card-text text-light justify-content-center">Goods receipt refers to the physical movement of goods into the warehouse from
+                          external vendors. Vendors can plan and manage your goods receipts and monitor the stock of ordered and produced
+                          materials.</p>
+
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+               </div>
+               <BR>
+                <BR>
+                  <BR>
+              <h1 class="text-center">Vendor Financial Data</h1>
+              <br>
+              <p class="text-dark p-4" style="width:100%; font-size: x-large;">The Vendor Financial Sheet is developed to have a complete financial transaction between the
+                vendor and the company. This page is designed to have complete financial data
+                belonging to that vendor.</p>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <a target="_blank" (click)="InvoiceDisplay()">
+                        <div class="card-body" style="background-color:slateblue">
+                          <h5 class="card-title text-light text-center">Invoice Information</h5>
+                          <br>
+                          <p class="card-text text-light justify-content-center"> The
+                            amount to be paid along with the details of the material is provided by the vendor in
+                            the form of a document that is known as the invoice.</p>
+
+                        </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <a target="_blank" (click)="CredDeb()">
+                        <div class="card-body" style="background-color:slateblue">
+                          <h5 class="card-title text-light text-center">Credit/Debit Memo</h5>
+                          <br>
+                          <p class="card-text text-light justify-content-center">Debit Memo is a transaction that reduces Amounts Payable to a vendor.
+                           A transaction that reduces Amounts Receivable from a customer is a Credit Memo.
+                          </p>
+
+                        </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="row justify-content-center">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <a target="_blank" (click)="PAY()">
+                        <div class="card-body" style="background-color:slateblue">
+                          <h5 class="card-title text-light text-center">Payments and Aging</h5>
+                          <br>
+                          <p class="card-text text-light justify-content-center">The Vendor aging report displays the balances that are due to vendors, sorted by
+                            date interval or by aging period definition.</p>
+
+                        </div>
+                        </a>
+                      </div>
+                    </div>
+                 </div>
+
+      </div>
+
+      <section class="p-5" id="InvoiceForm">
+        <div class="container">
+          <div class="row align-items-center justify-content-between">  <!--Single row with two columns for the grid-->
+            <div class="col-md p-5">
+                <h3>View you Invoice Details in a PDF powered by our Portal..</h3>
+                <br>
+                <p class="lead text-light">
+                   The Invoice Form displays the amount to be paid along with the details of the material is provided by the Vendor in
+                    the form of an Invoice Document.
+                    Our Portal displays the Invoice Receipt utilising the famed Adobe Form.
+                </p>
+                <button class="btn btn-light mt-3" data-bs-toggle="modal" data-bs-target="#invoice"> <!--Creating a button below it-->
+                  <i class="bi bi-chevron-right"></i> Generate Invoice Form  <!--Creating a chevron >  icon with the button-->
+                </button>
+
+
+                <div class="modal fade" id="invoice" data-bs-keyboard="false" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Invoice Form Generation Section</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-dark"> <!--Body of the modal - form-->
+                        <p class="lead text-dark">Invoice Details Panel</p>
+                        <!--Placing the contents of the Modal in the form-->
+                        <form ngNativeValidate [formGroup]="InvoiceForm" (submit)="InvoiceView()">
+                            <div class="invoice mb-3">
+                              <label for="Invoice-Number" class="col-form-label">Invoice Number:</label>
+                              <input type="text" [(ngModel)]="invoiceno" class="form-control" formControlName="invoiceno" required />
+                            </div>
+                            <div class="invoice mb-3">
+                              <label for="Fiscal-Year" class="col-form-label">Fiscal Year:</label>
+                              <input type="text" [(ngModel)]="fiscalyr" class="form-control" formControlName="fiscalyr" required />
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                </div>
+                <div class="col-md">
+                  <img src="assets/AK4.svg" class="img-fluid" alt="" style="padding-left: 50px; width:500px;">
+              </div>
+
+        </div>
+        </div>
+        </section>
+
+      <br>
+
+      <section class="p-5 bg-light" id="MeanStack">
+        <div class="container">
+            <h2 class="text-dark text-center">Powered By</h2>
+      <br>
+      <br>
+            <div class="row g-3">
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light" style="border: none;">
+                <div class="card-body">
+                  <a target="_blank" href="https://nodejs.org/en/about/">
+                    <img src="assets/images (6).png" syle=" object-fit: cover;"alt="">
+                    </a>
+                </div>
+        </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card bg-light"  style="border: none;">
+          <div class="card-body">
+            <a target="_blank" href="https://angular.io/start">
+              <img src="assets/images (7).jfif" syle=" object-fit: cover;"alt="">
+              </a>
+          </div>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light"  style="border: none;">
+        <div class="card-body">
+          <a target="_blank" href="https://www.sap.com/india/products.html">
+            <img src="assets/download (6).png" syle=" object-fit: cover;"alt="">
+            </a>
+        </div>
+      </div>
+      </div>
+        </div>
+        </div>
+        </section>
+
+    </div>
+    </div>
+    <div *ngIf="formddisp">
+      <div *ngIf="!InvFormShow" class="loader" style="min-height: 50vh;">
+        <div *ngIf="!InvFormShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+          <strong>Loading...</strong>
+          <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+          </div>
+          </div>
+        </div>
+    <div *ngIf="InvFormShow">
+      <iframe [src]="this.urlSafe" height="1200" width="1530"></iframe>
+      </div>
+      </div>
+    <div class="wrap">
+      <br>
+      <br>
+
+      <div *ngIf="RFQStatus">
+        <div *ngIf="!RFQShow" class="loader" style="min-height: 50vh;">
+          <div *ngIf="!RFQShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+            </div>
+            </div>
+          </div>
+          <div *ngIf="RFQShow">
+
+            <br>
+            <h1 class="text-center">Request for Quotation Header Data</h1>
+            <br>
+            <mat-slide-toggle (toggleChange)="changeTheme(1)" style="padding-left:20px;">Switch Mode
+            </mat-slide-toggle>
+            <br>
+        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme1" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+        [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="rfq.HEAD" [columnDefs]="this.colDefs">
+
+        </ag-grid-angular>
+
+        </div>
+        <br>
+        <div *ngIf="RFQShow">
+
+          <br>
+          <h1 class="text-center">Request for Quotation Item Data</h1>
+          <br>
+          <mat-slide-toggle (toggleChange)="changeTheme(2)" style="padding-left:20px;">Switch Mode
+          </mat-slide-toggle>
+          <br>
+      <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme2" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+      [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="rfq.ITEMS" [columnDefs]="this.colDefs1">
+
+      </ag-grid-angular>
+
+      </div>
+      </div>
+      <div *ngIf="POStatus">
+        <div *ngIf="!POShow" class="loader" style="min-height: 50vh;">
+          <div *ngIf="!POShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+            </div>
+            </div>
+          </div>
+          <div *ngIf="POShow">
+
+            <br>
+            <h1 class="text-center">Purchase Order Header Data</h1>
+            <br>
+            <mat-slide-toggle (toggleChange)="changeTheme(3)" style="padding-left:20px;">Switch Mode
+            </mat-slide-toggle>
+            <br>
+        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme3" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+        [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="po.HEAD" [columnDefs]="this.colDefs">
+
+        </ag-grid-angular>
+
+        </div>
+        <br>
+        <div *ngIf="POShow">
+
+          <br>
+          <h1 class="text-center">Purchase Order Item Data</h1>
+          <br>
+          <mat-slide-toggle (toggleChange)="changeTheme(4)" style="padding-left:20px;">Switch Mode
+          </mat-slide-toggle>
+          <br>
+      <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme4" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+      [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="po.ITEMS" [columnDefs]="this.colDefs1">
+
+      </ag-grid-angular>
+
+      </div>
+      </div>
+
+
+      <div *ngIf="GRStatus">
+        <div *ngIf="!GRShow" class="loader" style="min-height: 50vh;">
+          <div *ngIf="!GRShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+            </div>
+            </div>
+          </div>
+          <div *ngIf="GRShow">
+
+            <br>
+            <h1 class="text-center">Goods Receipt Header Data</h1>
+            <br>
+            <mat-slide-toggle (toggleChange)="changeTheme(5)" style="padding-left:20px;">Switch Mode
+            </mat-slide-toggle>
+            <br>
+        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme5" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+        [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="gr.HEAD" [columnDefs]="this.colDefs">
+
+        </ag-grid-angular>
+
+        </div>
+        <br>
+        <div *ngIf="GRShow">
+
+          <br>
+          <h1 class="text-center">Goods Receipt Item Data</h1>
+          <br>
+          <mat-slide-toggle (toggleChange)="changeTheme(6)" style="padding-left:20px;">Switch Mode
+          </mat-slide-toggle>
+          <br>
+      <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme6" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+      [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="gr.ITEMS" [columnDefs]="this.colDefs1">
+
+      </ag-grid-angular>
+
+      </div>
+      </div>
+
+      <div *ngIf="invdisstatus">
+        <div *ngIf="!InvDispShow" class="loader" style="min-height: 50vh;">
+          <div *ngIf="!InvDispShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+            </div>
+            </div>
+          </div>
+          <div *ngIf="InvDispShow">
+
+            <br>
+            <h1 class="text-center">Invoice Header Details</h1>
+            <br>
+            <mat-slide-toggle (toggleChange)="changeTheme(10)" style="padding-left:20px;">Switch Mode
+            </mat-slide-toggle>
+            <br>
+        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme10" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+        [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="InvDisp.INVDISP" [columnDefs]="this.colDefs">
+
+        </ag-grid-angular>
+
+        </div>
+      </div>
+
+
+
+
+
+        <div *ngIf="CreditStatus">
+          <div *ngIf="!CreditShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!CreditShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="CreditShow">
+
+              <br>
+              <h1 class="text-center">Credit Memo Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(7)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme7" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="credit.CRED" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+
+        <div *ngIf="DebitStatus">
+          <div *ngIf="!DebitShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!DebitShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="DebitShow">
+
+              <br>
+              <h1 class="text-center">Debit Memo Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(8)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme8" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="debit.DEBIT" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+
+        <div *ngIf="PayStatus">
+          <div *ngIf="!PayShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!PayShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="PayShow">
+
+              <br>
+              <h1 class="text-center">Payments and Aging Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(9)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme9" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="pay.PAY" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+
+
+
+
+
+                </div>
+
+                <div *ngIf="ViewHome">
+                <footer class="p-5 bg-dark text-center text-light position-relative">
+                  <div class="container" style="height:fit-content;">
+                      <p class="lead"><strong> &copy; AK Vendor Portal 2021 </strong><!--&copy - copyright symbol-->
+                      </p>
+                  </div>
+              </footer>
+              </div>
+
+              <div *ngIf="!ViewHome">
+                <footer class="p-5 bg-dark text-center text-light" style="margin-top: 50vh;">
+                  <div class="container" style="height:fit-content;">
+                      <p class="lead"><strong> &copy; AK Vendor Portal 2021 </strong><!--&copy - copyright symbol-->
+                      </p>
+                  </div>
+              </footer>
+              </div>
+
+
+    </body>
+</html>

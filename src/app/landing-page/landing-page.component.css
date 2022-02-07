@@ -1,0 +1,138 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+.navbar{
+  width:auto;
+  padding:20px;
+  overflow: hidden;
+}
+#map{ /*Give px instead of percentage for height and width */
+  width: 600px;
+  height:300px;
+  border-radius: 10px;
+}
+.about{
+  padding-left:30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+@media (max-width: 1600px) {
+  .abimg #rowfoot{
+    margin-top: -100px; margin-bottom: 40px;
+  }
+  .abimg #rowfoot #textfoot{
+    margin-left: 475px;
+  }
+  .abimg #rowfoot #imgfoot{
+    width: 150px; height: 150px; margin-left: -130px; margin-top: -60px;
+  }
+}
+.content h1{
+  padding:100px;
+}
+.navbar ul li{
+  padding:0 10px;
+}
+.hid-box1:hover{
+  transition: 0.2s;
+  transform: scale(1.05);
+}
+.hid-box2:hover{
+  transition: 0.2s;
+  transform: scale(1.05);
+}
+.hid-box3:hover{
+  transition: 0.2s;
+  transform: scale(1.05);
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+  overflow: hidden;
+}
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: lightcyan;
+}
+
+h1 {
+  margin: 0;
+  color: #fafafa;
+}
+.content{
+  background-color: black;
+  color: lightcyan;
+
+}
+
+.container{
+  display: grid;
+  grid-row-gap: 30px;
+}
+.about{
+  display: grid;
+  grid-row-gap: 30px;
+}
+.list-group li{
+  padding: 15px;
+}
+.powered{
+  overflow: hidden;
+  padding-top: 150px; background-color: white;
+  padding-bottom: 30px;
+}
+a{
+  text-decoration: none;
+}
+.box-1{
+  height: 70vh;
+  margin-left: 0;
+  color: aliceblue;
+
+  border: none;
+  background: rgb(255, 255, 255);
+}
+.box-2{
+  height: 70vh;
+  margin-left: 0;
+  color: aliceblue;
+
+  border: none;
+  background: rgb(255, 255, 255);
+}
+.box-3{
+  height: 70vh;
+  margin-left: 0;
+  color: aliceblue;
+
+  border: none;
+  background: rgb(255, 255, 255);
+}
+
+
+.hid-box1 {
+  top: 50;
+  position: relative;
+  transition: all 1.3s ease-out;
+  background: #f10202;
+  height: 100%;
+}
+.hid-box2 {
+  top: 50;
+  position: relative;
+  transition: all .3s ease-out;
+  background: #044ed8;
+  height: 100%;
+}
+.hid-box3 {
+  top: 50;
+  position: relative;
+  transition: all .3s ease-out;
+  background: #34b600;
+  height: 100%;
+}
+
+
+

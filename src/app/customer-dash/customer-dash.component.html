@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+
+    <link rel="stylesheet" href="customer-dash.component.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!--<link rel="styleSheet" href="release/ui-grid.min.css"/>-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script src="/release/ui-grid.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <script type="text/javascript">
+      document.body.innerHTML = '';
+  </script>
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0);" target="_self">Customer Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="javascript:void(0);" (click)="home()" >Home</a>
+        </li>
+        <li class="nav-item">
+        <a  class="nav-link active"  data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          Your Dashboard
+        </a>
+      </li>
+
+        <li class="nav-item dropdown" style="width:300px;">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="details()">
+            View Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width:300px">
+            <div *ngIf="!ViewDetails">
+              <div class="d-flex align-items-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div *ngIf="ViewDetails">
+            <li>First Name : {{viewdet.NAME}}</li>
+            <li>Last Name : {{viewdet.NAME_2}}</li>
+            <li>City of Residence : {{viewdet.CITY}}</li>
+            <li>District : {{viewdet.DISTRICT}}</li>
+            <li>Telephone Number : {{viewdet.TELEPHONE}}</li>
+           <!--- <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+          </div>
+          </ul>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    <li class="nav-item dropdown" style="width:250px;">
+      <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Customer Master ID's
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div *ngIf="!MasterDetails">
+          <div class="d-flex align-items-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div *ngIf="MasterDetails">
+          <div *ngFor="let item of filelist">
+            Customer ID : {{item}}
+          </div>
+        </div>
+        </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="javascript:void(0);" (click)="logout()">Logout  <i class="bi bi-power"></i></a>
+        </li>
+
+        </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close btn-close-white" (click)="closeside()" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <div class="sidehead">
+          <h3>Welcome Customer {{id}}</h3>
+      </div>
+
+      <ul class="sidelist">
+         <!---- <p>CUSTOMER DASHBOARD</p> -->
+         <!--- <li>
+              <a href="javascript:void(0);" (click)="forminit()">Edit Your Details</a>
+          </li> -->
+          <li>
+            <a href="javascript:void(0);" (click)="inquiryData()">Customer Inquiry Data</a>
+
+          </li>
+          <li>
+              <a href="javascript:void(0);" (click)="salesOrder()">Customer Sales Order Data</a>
+          </li>
+          <li>
+              <a href="javascript:void(0);" (click)="deliveryData()">Customer Delivery Data</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" (click)="creditData()">Credit Memo Data</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="debitData()">Debit Memo Data</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" (click)="payments()">Payments and Aging</a>
+    </li>
+      </ul>
+
+      <div class="kaar" style="padding-left: 20px; padding-top: 50px;">
+        <div class="abimg">  <!--Single row with two columns for the grid-->
+          <div class="row" id="rowfoot">
+            <div class="col-md text-light" id='textfoot'>
+              <h5 style="padding-top: 12px;" >15 Years Of SAP Excellence,</h5>
+          </div>
+          <div class="col-md">
+                  <img src="assets/logo.png" id='imgfoot' style="width:100px;height: 100px;" class="img-fluid">
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+   <!--- <style>
+      #learn{
+      background-image: url('assets/One.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      }
+    </style> -->
+    <div *ngIf="ViewHome">
+    <div id="home">
+    <section class="p-5" id="learn">
+      <div class="container">
+          <div class="row align-items-center justify-content-between">  <!--Single row with two columns for the grid-->
+              <div class="col-md">
+                  <img src="assets/hero-img (1).png" class="img-fluid" alt="" style="width: 600px; height: 300px;">
+              </div>
+              <div class="col-md p-5">
+                  <h3>Access Your Sales and Financial Data on the Go!</h3>
+                  <p class="lead text-light">
+                    Our Customer portal, helps you find your desired business data that is fetched from the SAP
+                    ERP system and displays it instantly with seamless web-service interaction. The
+                    customer dashboard is designed and developed keeping the customer in mind to know the
+                    complete business transaction in a single window with user friendly navigations.
+                  </p>
+              <a class="btn btn-light mt-3" href="javascript:void(0);" (click)="forminit()">
+                  <i class="bi bi-chevron-right"></i> Edit Your Details
+              </a>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!--<label for="file">File:</label>
+<input type="file" (change)="upload($event)" accept=".mp4" />
+<progress max="100" [value]="(uploadProgress | async)"></progress>
+<button class="btn-primary" (click)="download()">Download File!</button> -->
+
+
+
+<div class="usability " style="background-color:red; width: 100%; padding: 40px;">
+<h1 class="text-center text-light">Functionalities We Provide <i class="bi bi-lightbulb-fill align-middle"></i></h1>
+<br>
+<p class="text-center p-4 text-light" style="font-size: large;">
+  The Functional Motive of our Customer Portal is to provide the functionalities of Sales and Distribution
+  (SD) and Finance (FI) module of the SAP System to our customers seamlessly and with utmost simplicity of access.
+  This portal is to be designed for maintaining the data of all the customers carrying out business with
+  the organization. The Customer portal provides an interface to the customer to access and view the complete
+  transaction between the company and customer.
+</p>
+</div>
+<div class="FunctionalCards">
+<h1 class="text-center">Customer Sales Data</h1>
+<br>
+<p class="text-dark p-4" style="width:100%; font-size: x-large;">The Customer Sales Data Dashboard is designed and developed to have the end to end
+  transactions between logon customer and the company. This page provides complete sales data belonging to that customer.</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+             <a target="_blank" (click)="inquiryData()">
+            <div class="card-body bg-dark">
+              <h5 class="card-title text-light text-center">Inquiry information</h5>
+              <br>
+              <p class="card-text text-light justify-content-center">A customer inquiry comprises one or more items that contain the quantity of a
+                material or service that the customer asked from a vendor.</p>
+
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <a target="_blank" (click)="salesOrder()">
+            <div class="card-body bg-dark">
+              <h5 class="card-title text-light text-center">Sales Order Data</h5>
+              <br>
+              <p class="card-text text-light justify-content-center">Sale order data contains a request from a customer to a company to deliver a defined quantity of
+                products or provide a service at a certain time. </p>
+
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <BR>
+        <BR>
+          <div class="row justify-content-center">
+            <div class="col-sm-6">
+              <div class="card">
+                <a target="_blank" (click)="deliveryData">
+                <div class="card-body bg-dark">
+                  <h5 class="card-title text-light text-center">Delivery List Data</h5>
+                  <br>
+                  <p class="card-text text-light justify-content-center">The delivery document is the central object in the Shipping component. When a
+                    delivery is created, shipping activities such as delivery scheduling, picking and
+                    packing are triggered in the system.</p>
+
+                </div>
+                </a>
+              </div>
+            </div>
+         </div>
+         <BR>
+          <BR>
+            <BR>
+        <h1 class="text-center">Customer Financial Data</h1>
+        <br>
+        <p class="text-dark p-4" style="width:100%; font-size: x-large;">The Customer Financial Sheet has the complete financial transaction between
+          the customer and the company. This page is designed have complete financial data belonging to that customer.</p>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <a target="#irpa">
+                  <div class="card-body bg-danger">
+                    <h5 class="card-title text-light text-center">Invoice Details</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">Invoice is a document which holds the amount to be paid back to the vendor. The
+                      amount in the invoice would be entered against the purchase order in the incoming
+                      invoice transaction.</p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <a target="_blank" (click)="CredDeb()">
+                  <div class="card-body bg-danger">
+                    <h5 class="card-title text-light text-center">Credit/Debit Memo</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">Debit Memo is a transaction that reduces Amounts Payable to a vendor.
+                     A transaction that reduces Amounts Receivable from a customer is a Credit Memo.
+                    </p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+              <div class="col-sm-6">
+                <div class="card">
+                  <a target="_blank" (click)="payments()">
+                  <div class="card-body bg-danger">
+                    <h5 class="card-title text-light text-center">Payments and Aging</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">The aging report displays the balances, sorted by date interval or by aging period
+                      definition.</p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+           </div>
+
+</div>
+<br>
+<br>
+<section class="p-5" id="MasterData">
+<div class="container">
+  <div class="row align-items-center justify-content-between">
+    <div class="col-md">
+        <img src="assets/showcase.svg" class="img-fluid" alt="" style="padding-left: 50px; width:500px;">
+    </div>
+    <div class="col-md p-5">
+        <h3>Upload Master Data for your Fellow Colleagues too!</h3>
+        <br>
+        <p class="lead text-light">
+          In our Customer portal,you can now upload the master data of your fellow colleague in the form of a MS-Excel file
+          which will automatically be entered in the SAP ABAP Backend system while you sit back and relax.Finally just don't
+          the system will generate and return a Customer ID which is assigned to your Colleague.
+        </p>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Master Upload <i class="bi bi-upload"></i>
+        </button>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" id="staticBackdropLabel">Customer Master Upload</h5>
+               <!---- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+              </div>
+              <div class="modal-body text-dark text-center">
+                Upload Customer Data Here!
+                <div class="menuxl" style="padding-top: 10px;">
+                  <input type="file" class="form-control" (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+              <!---  <button type="button" class="btn btn-primary">Understood</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+ <section class="p-5 " id="irpa">
+  <div class="container">
+      <div class="row align-items-center justify-content-between" style="padding-top: 50px;">
+          <div class="col-md">
+              <h3 class="text-dark">Automated Customer Invoice Generation with iRPA</h3>
+              <br>
+              <br>
+              <p class="lead text-dark" style="padding-right: 10px;">
+                SAP Intelligent Robotic Process Automation uses intelligent bots to automate repetitive manual processes. As the robotic process automation layer of SAP’s Business Technology Platform, it can redirect resources to high-value activities and processes.
+                <br>
+                <br>
+                Here's an executed snippet for You!
+              </p>
+
+<!----          <a href="#" class="btn btn-light mt-3">
+              <i class="bi bi-chevron-right"></i> Read More
+          </a> -->
+          </div>
+          <div class="col-md">
+            <div class="video">
+              <video controls (click)="toggleVideo(event)" #videoPlayer  width="700px" height="400px" >
+                <source src="assets/Invoice.mp4" type="video/mp4"  />
+              </video>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="p-5" id="OverallSales">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">  <!--Single row with two columns for the grid-->
+      <div class="col-md p-5">
+          <h3>View the Comprehensive Sales Analysis provided by our Portal..</h3>
+          <br>
+          <p class="lead text-light">
+            The Overall Sales Data provided by our Portal is predicted using Machine Learnings algorithms.
+            When the Dataset is provided by the user, the system will predict the overall sales that happened during the fiscal
+            year and generate a graphical analysis for making the data visually simpler.
+          </p>
+          <a href="https://www.kaggle.com/silvergod10/overall-sales-data/edit" class="btn btn-light mt-3"> <!--Creating a button below it-->
+            <i class="bi bi-chevron-right"></i> View Sales Analysis  <!--Creating a chevron >  icon with the button-->
+        </a>
+          </div>
+          <div class="col-md">
+            <img src="assets/images (10).png" class="img-fluid" alt="" style="padding-left: 50px; width:500px;">
+        </div>
+
+  </div>
+  </div>
+  </section>
+<section class="p-5 bg-light" id="MeanStack">
+  <div class="container">
+      <h2 class="text-dark text-center">Built with Mainstream Technologies</h2>
+<br>
+<br>
+      <div class="row g-3">
+<div class="col-md-6 col-lg-4">
+  <div class="card bg-light" style="border: none;">
+          <div class="card-body">
+            <a target="_blank" href="https://nodejs.org/en/about/">
+              <img src="assets/images (6).png" syle=" object-fit: cover;"alt="">
+              </a>
+          </div>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <div class="card bg-light"  style="border: none;">
+    <div class="card-body">
+      <a target="_blank" href="https://angular.io/start">
+        <img src="assets/images (7).jfif" syle=" object-fit: cover;"alt="">
+        </a>
+    </div>
+    </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card bg-light"  style="border: none;">
+  <div class="card-body">
+    <a target="_blank" href="https://www.sap.com/india/products.html">
+      <img src="assets/download (6).png" syle=" object-fit: cover;"alt="">
+      </a>
+  </div>
+</div>
+</div>
+  </div>
+  </div>
+  </section>
+  </div>
+  </div>
+
+
+
+      <div class="wrap">
+
+      <!-- Page Content -->
+      <div *ngIf="editdetails">
+
+    <div class="editdetails justify-content-center" style="width:70%;padding-left: 400px; padding-top: 30px; padding-bottom: 40px;"  id="cedit">
+      <mat-toolbar color="black">
+        <span class="fill-remaining-space">Customer Details Edit Section</span>
+      </mat-toolbar>
+      <br>
+      <br>
+      <form  [formGroup]="editform" (ngSubmit)="onSubmit()">
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="First Name" formControlName="FirstName">
+        </mat-form-field>
+
+        <mat-form-field class="form-element" style="display: block;">
+          <input matInput placeholder="Last Name" formControlName="LastName">
+        </mat-form-field>
+
+       <!---- <mat-form-field class="form-element">
+          <input matInput placeholder="Customer Number" formControlName="CustomerNumber">
+        </mat-form-field>-->
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Mobile Number" formControlName="MobileNumber">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Aternate Number" formControlName="AlternateNumber">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Street/Apartment Number" formControlName="StreetNumber">
+        </mat-form-field>
+
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="City" formControlName="City">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="District" formControlName="District">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Region/State" formControlName="Region">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="PinCode" formControlName="PinCode">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <mat-hint>Enter the First three letter of your country's name</mat-hint>
+          <input matInput placeholder="Country-Code" formControlName="CountryCode">
+        </mat-form-field>
+
+
+        <div class="form-element">
+          <button mat-raised-button color="dark" type="submit" class="button">Update Details</button>
+        </div>
+      </form>
+      <div *ngIf="EditDetails">
+        <h4>{{editcust.MESSAGE}}</h4>
+      </div>
+      </div>
+      </div>
+
+      <div *ngIf="inquirystatus">
+        <div *ngIf="!InquiryShow" class="loader" style="min-height: 50vh;">
+          <div *ngIf="!InquiryShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+            </div>
+            </div>
+          </div>
+          <div *ngIf="InquiryShow">
+
+            <br>
+            <h1 class="text-center">Customer Inquiry Header Data</h1>
+            <br>
+            <mat-slide-toggle (toggleChange)="changeTheme(1)" style="padding-left:20px;">Switch Mode
+            </mat-slide-toggle>
+            <br>
+        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme1" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+        [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="items.headers" [columnDefs]="this.colDefs">
+
+        </ag-grid-angular>
+
+        </div>
+        <br>
+        <div *ngIf="InquiryShow">
+
+          <br>
+          <h1 class="text-center">Customer Inquiry Item Data</h1>
+          <br>
+          <mat-slide-toggle (toggleChange)="changeTheme(2)" style="padding-left:20px;">Switch Mode
+          </mat-slide-toggle>
+          <br>
+      <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme2" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+      [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="items.LINEITEMS" [columnDefs]="this.colDefs1">
+
+      </ag-grid-angular>
+
+      </div>
+      </div>
+
+
+
+        <div *ngIf="salesstatus">
+          <div *ngIf="!SalesShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!SalesShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="SalesShow">
+
+              <br>
+              <h1 class="text-center">Customer Sales Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(3)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme3" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="sales.orders" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+
+        <div *ngIf="deliverystatus">
+          <div *ngIf="!DeliveryShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!DeliveryShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="DeliveryShow">
+
+              <br>
+              <h1 class="text-center">Customer Delivery Header Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(4)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme4" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="delivery.headers" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+          <br>
+          <div *ngIf="DeliveryShow">
+
+            <br>
+            <h1 class="text-center">Customer Delivery Item Data</h1>
+            <br>
+            <mat-slide-toggle (toggleChange)="changeTheme(5)" style="padding-left:20px;">Switch Mode
+            </mat-slide-toggle>
+            <br>
+        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme5" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+        [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="delivery.LINEITEMS" [columnDefs]="this.colDefs1">
+
+        </ag-grid-angular>
+
+        </div>
+        </div>
+
+        <div *ngIf="creditstatus">
+          <div *ngIf="!CreditShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!CreditShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="CreditShow">
+
+              <br>
+              <h1 class="text-center">Credit Memo Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(6)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme6" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="credit.custcd" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+        <div *ngIf="debitstatus">
+          <div *ngIf="!DebitShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!DebitShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="DebitShow">
+
+              <br>
+              <h1 class="text-center">Debit Memo Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(7)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme7" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="debit.custcd" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+
+        <div *ngIf="paymentsstatus">
+          <div *ngIf="!PayShow" class="loader" style="min-height: 50vh;">
+            <div *ngIf="!PayShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+              </div>
+              </div>
+            </div>
+            <div *ngIf="PayShow">
+
+              <br>
+              <h1 class="text-center">Payments and Aging Data</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(8)" style="padding-left:20px;">Switch Mode
+              </mat-slide-toggle>
+              <br>
+          <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme8" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="payage.payop" [columnDefs]="this.colDefs">
+
+          </ag-grid-angular>
+
+          </div>
+        </div>
+
+           </div>
+
+
+                  <div *ngIf="ViewHome">
+                    <footer class="p-5 bg-dark text-center text-light position-relative">
+                      <div class="container" style="height:fit-content;">
+                          <p class="lead"><strong> &copy; AK Customer Portal 2021 </strong><!--&copy - copyright symbol-->
+                          </p>
+                      </div>
+                  </footer>
+                  </div>
+
+                  <div *ngIf="!ViewHome">
+                    <footer class="p-5 bg-dark text-center text-light" style="margin-top: 50vh;">
+                      <div class="container" style="height:fit-content;">
+                          <p class="lead"><strong> &copy; AK Customer Portal 2021 </strong><!--&copy - copyright symbol-->
+                          </p>
+                      </div>
+                  </footer>
+                  </div>
+  </body>
+</html>
+
+

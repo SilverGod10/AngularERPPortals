@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  <!--<link rel="styleSheet" href="release/ui-grid.min.css"/>-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+<script src="/release/ui-grid.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">AK-PORTALS.COM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#services">Our Services</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="https://www.kaartech.com/">KaarTech Website</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#contact">Contact Us <i class="bi bi-telephone-fill"></i></a>
+          </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="content">
+    <h1 style="text-align: center;">ERP Portals brought to all our Vendors,Customers and Employees at One Place.</h1>
+  </div>
+  <br>
+  <div class="about" style="background-color:white;">
+    <h1 style="color: black; padding-top:30px; text-align: center;">About Kaar Technologies</h1>  <!--Single row with two columns for the grid-->
+    <p class="lead p-5" style="color: black; font-size:x-large; text-align: center;">Kaar Technologies is a global consulting firm focused at designing, delivering and deploying the finest ideas and SAP expertise to empower companies in achieving new heights of excellence in today’s challenging business landscape.
+      As a CMMi level 3 company, Kaar believes in being a trusted advisor to clients and fosters long-term working relationships by exceeding customer expectations.Driven by the steadfast pursuit of excellence, Kaar Technologies exudes professionalism and proficiency in all areas of function.
+    </p>
+    <br>
+    <br>
+    <br>
+    <div class="abimg">  <!--Single row with two columns for the grid-->
+      <div class="row" id="rowfoot">
+        <div class="col-md text-light" id='textfoot'>
+          <h3 style="color: black;">15 Years Of SAP Excellence,</h3>
+      </div>
+      <div class="col-md">
+              <img src="assets/logo.png" id='imgfoot' class="img-fluid">
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="Functions bg-dark text-light" style="padding-bottom: 20px;">
+    <h1 class="text-warning"style="text-align: center; padding-top:60px;">What Our Portals Offer You... <i class="bi bi-window"></i></h1>
+    <br>
+    <p class="lead p-5" style="font-size: large;"> Our Portals are designed to equip business level implementation of the SAP core functional modules (FICO,HCM,MM) to be accessible to all Customers,Vendors
+      and Employees.The Portals designed by us are based on SAP ERP,developed for a particular organisation.
+      The verticals served by us includes Customer Portal,Vendor Portal and Employee Portal, all stacked together.</p>
+  </div>
+  <div class="container" id="services">
+<h1 style="color: black; padding-top:70px; text-align: center;">Our Services</h1>
+<br>
+<p class="lead" style="color: black; font-size:x-large; text-align: center;">Experience the user-friendliness and a range of well-integrated functionalities, designed for Customers,Vendors and Employees alike according
+  to their requirements and made easily accessible to them,all in a Single-Page with a Single-Click..
+</p>
+<br>
+<h3 style="color: black; text-align: center;">Navigate To Your Portal -></h3>
+<br>
+<div class="row">
+  <div class="col-4 box-1">
+    <div class="hid-box1">
+      <a href="http://localhost:4200/customer-login">
+      <h1 style="padding-top:100px;justify-content: center; text-align: center;">Customer Portal</h1>
+      <p class="lead p-5">If you are a Customer , wanting to access your Financial and Sales data , then click this tile and quickly jump into our Customer Portal developed , keeping in mind the requirements and ease of access for our Customers..</p>
+   </a>
+    </div>
+  </div>
+  <div class="col-4 box-2">
+    <div class="hid-box2">
+      <a href="http://localhost:4200/vendor-login">
+      <h1 style="padding-top:100px; margin-left: -30px; justify-content: center; text-align: center;">Vendor Portal</h1>
+      <p class="lead p-5">If you are a Vendor , wanting to access your Financial and Order data , then click this tile and quickly jump into our Vendor Portal developed for the Vendors who thrive on day-to-day business transactions..</p>
+    </a>
+    </div>
+  </div>
+  <div class="col-4 box-3">
+    <div class="hid-box3">
+      <a href="http://localhost:4200/employee-login">
+      <h1 style="padding-top:100px;justify-content: center; text-align: center;">Employee Portal</h1>
+      <p class="lead p-5">If you are an Employee , wanting to access your official and personal data , then click this tile and quickly jump into our Employee Portal developed , out-and-out for the hard-working Employees!</p>
+    </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="powered">
+  <h1 class="text-dark text-center" style="padding-bottom: 120px;">Powered by In-Class Technologies</h1>
+  <br>
+  <br>
+  <div class="row g-3">
+  <div class="col-md-6 col-lg-4">
+
+  <img src="assets/Adobe.webp" style="width:500px; height:200px; padding-left: 100px;"alt="">
+
+    </div>
+    <div class="col-md-6 col-lg-4">
+          <img src="assets/Java.webp" style="width:500px; height:200px; padding-left: 100px;" alt="">
+  </div>
+  <div class="col-md-6 col-lg-4">
+        <img src="assets/download (6).png" style="width:430px; height:200px; padding-left: 100px;"alt="">
+    </div>
+  </div>
+  </div>
+
+<section class="p-5" style="background-color: white;" id="contact">
+  <div class="container" style="padding-bottom: 50px;">
+    <h1 class="text-center mb-4 text-dark" style="padding-top: 120px;">Contact Us</h1>
+
+    <p class="lead p-5" style="color:black; font-size: x-large;">Contact Us for Futher Queries regarding Our Services through E-mail or Telephone. We have also added a Navigational Map for your convinience, if you wish to visit
+      us directly at our Location of Operation.
+    </p>
+    <br>
+      <div class="row g-4">
+          <div class="col-md">
+              <!--Creating List for placing contact details and along with flush accordion to enable the collapse feature-->
+              <ul class="list-group list-group-flush lead">
+                  <li class="list-group-item">
+                      <!--Using span class to make the specifics bold(fw-bold)-->
+                      <span class="fw-bold">Main Location : </span>Level 8, Shyamala Towers ,
+                      No 136 ,Arcot Road
+                  </li>
+                  <li class="list-group-item">
+                    <span class="fw-bold">City of Operation : </span>
+                    Chennai- 600 093
+                  </li>
+                  <li class="list-group-item">
+                      <span class="fw-bold">TelePhone : </span>+91 (44) 4065 1500
+                    </li>
+                    <li class="list-group-item">
+                      <span class="fw-bold">Fax : </span>+91 (44) 4065 1512
+                    </li>
+                    <li class="list-group-item">
+                      <span class="fw-bold">Query Email : </span>
+                      info@kaartech.com
+                    </li>
+              </ul>
+          </div>
+          <!--Map-->
+          <div class="col-md">
+              <!--For adding the map-->
+              <div id="map"></div>
+          </div>
+      </div>
+  </div>
+</section>
+<footer class="p-5 bg-dark text-center text-light position-relative">
+  <div class="container" style="height:fit-content;">
+      <p class="lead" style="font-size: x-large;"><strong> &copy; AK-Portals.com 2021 </strong><!--&copy - copyright symbol-->
+      </p>
+  </div>
+</footer>
+</body>
+</html>

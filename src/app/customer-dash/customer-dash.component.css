@@ -1,0 +1,166 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+.navbar{
+  width: auto;
+}
+.wrap{
+  width:100%;
+  overflow:auto;
+  }
+
+.navbar ul li{
+  padding:0 10px;
+}
+#learn{
+  background: linear-gradient(to bottom, #a7e90d, #05cc16);
+      color: white;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+.content{
+  overflow:auto;
+  width:100%;
+}
+
+.FunctionalCards{
+  padding:50px 50px;
+
+}
+
+#MeanStack{
+  background-color: slategrey;
+}
+
+#MasterData{
+  background: linear-gradient(to bottom, #2d7cf3, #0656c0);
+  color: white;
+}
+
+#irpa{
+  background: linear-gradient(to bottom, #ffffff, #d4d9e0);
+
+}
+
+
+#irpa video:hover{
+  transition: 0.05s;
+  transform: scale(1.1);
+}
+
+#OverallSales{
+  background: linear-gradient(to bottom, #d60606, #a50909);
+  color: white;
+}
+
+.card:hover {
+  transition: 0.05s;
+  transform: scale(1.05);
+
+}
+
+
+.card-body{
+  padding:50px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+.offcanvas h3{
+  padding:20px 0;
+}
+#sidebar .sidebar-header {
+  padding: 20px;
+  background:white;
+}
+
+.offcanvas{
+  width:380px;
+}
+
+.offcanvas ul{
+  list-style-type: none;
+  padding: 0%;
+}
+
+.offcanvas ul li a{
+  text-decoration: none;
+  color: white;
+  padding: 20px 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+.offcanvas ul li a:hover{
+color: black;
+background:white;
+}
+
+
+.inq {
+  display: flex;
+  height: 200%;
+  align-items: stretch;
+}
+
+
+.mat-table {
+  width: 4000px;
+  height: 1500px;
+}
+
+#inquiry{
+  width: 1500px;
+  height: auto;
+}
+#saleorder{
+  width: 5000px;
+  height: auto;
+}
+#credtable{
+  width: 4000px;
+  height: auto;
+}
+
+#paytable{
+  width: 4000px;
+  height: auto;
+}
+
+#debtable{
+  width: 4000px;
+  height: auto;
+}
+
+#deliverytab{
+  width: 4000px;
+  height: auto;
+}
+
+
+
+.mat-column-column {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+#menuxl{
+  display: none;
+}
+
+

@@ -1,0 +1,153 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+body {
+  margin-bottom: auto;
+  overflow: hidden;
+  background: #007bff;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+@media (max-width: 1600px) {
+  .container #rowfoot{
+    margin-top: -100px; margin-bottom: 40px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 505px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: -230px;
+  }
+}
+@media (max-width: 1400px) {
+  .container #rowfoot{
+    margin-top: -100px; margin-bottom: 40px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 420px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: -180px;
+  }
+}
+@media (max-width: 1200px) {
+  .container #rowfoot{
+    margin-top: -100px; margin-bottom: 40px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 320px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: -150px;
+  }
+}
+@media (max-width: 992px) {
+  .container #rowfoot{
+    margin-top: -100px; margin-bottom: 40px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 210px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: -90px;
+  }
+}
+@media (max-width: 768px) {
+  .container #rowfoot{
+    margin-top: -70px; margin-bottom: 40px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 250px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 290px; margin-top: -70px;
+  }
+}
+@media (max-width: 576px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 180px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 250px; margin-top: -70px;
+  }
+}
+@media (max-width: 445px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 100px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 200px; margin-top: -70px;
+  }
+}
+@media (max-width: 373px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 70px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 170px; margin-top: -70px;
+  }
+}
+@media (max-width: 338px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 30px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 150px; margin-top: -70px;
+  }
+}
+@media (max-width: 296px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 140px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 80px; margin-top: 20px;
+  }
+}
+@media (max-width: 285px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 120px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 70px; margin-top: 20px;
+  }
+}
+@media (max-width: 260px) {
+  .container #rowfoot{
+    margin-top: -80px; margin-bottom: 90px;
+  }
+  .container #rowfoot #textfoot{
+    margin-left: 90px;
+  }
+  .container #rowfoot #imgfoot{
+    width: 100px; height: 100px; margin-left: 50px; margin-top: 20px;
+  }
+}
+
+
+
+.form-floating label::after{
+  content: "*";
+  color: red;
+}

@@ -1,0 +1,142 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+.navbar{
+  width:auto;
+}
+#learn{
+  background: linear-gradient(to bottom, #fcca26, #eb7f04);
+  color: white;
+}
+#leavetypeclss{
+ width:100%;
+ height:100%;
+}
+
+ag-grid-angular{
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.wrap{
+  width:100%;
+  overflow:auto;
+  }
+  #LeaveDetails{
+    width: 2000px;
+    height: auto;
+  }
+  #LeaveQuota{
+    width: 2000px;
+    height: auto;
+  }
+  #offcanvasRight h5{
+    padding:20px 60px;
+  }
+
+  #offcanvasRight{
+    width:400px;
+  }
+  #offcanvasRight ul{
+    list-style-type: none;
+    padding: 0%;
+  }
+  #offcanvasRight ul li{
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 1.1em;
+    display: block;
+  }
+  .FunctionalCards{
+    background-color:seashell;
+    padding:50px 50px;
+
+  }
+  .card:hover {
+    transition: 0.05s;
+    transform: scale(1.05);
+
+  }
+  #final:hover{
+    transition: none;
+    transform: none;
+  }
+  #PayForm{
+    background: linear-gradient(to bottom, #11d8df, #0680a5);
+    color: white;
+  }
+.usability{
+  background-color:rgb(113, 16, 241);
+  width: 100%; padding:50px ;
+}
+  @media (max-width: 1600px) {
+
+    .container #rowfoot #textfoot{
+      margin-left: 405px;
+    }
+    .container #rowfoot #imgfoot{
+      width: 100px; height: 100px; margin-left: -180px;
+    }
+  }
+  .card-body{
+    padding:50px;
+  }
+.offcanvas h3{
+  padding:20px 0;
+}
+.offcanvas{
+  width:380px;
+}
+
+.offcanvas ul{
+  list-style-type: none;
+  padding: 0%;
+}
+
+.offcanvas ul li a{
+  text-decoration: none;
+  color: white;
+  padding: 20px 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+.offcanvas ul li a:hover{
+color: black;
+background:white;
+}
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+.navbar ul li{
+  padding:0 10px;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+}
+
+.mat-column-column {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.eform label::after{
+  content: "*";
+  color: red;
+}
+
+.payf label::after{
+  content: "*";
+  color: red;
+}

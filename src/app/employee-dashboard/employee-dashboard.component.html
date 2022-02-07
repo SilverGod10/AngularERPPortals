@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+
+    <link rel="stylesheet" href="employee-dashboard.component.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!--<link rel="styleSheet" href="release/ui-grid.min.css"/>-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script src="/release/ui-grid.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+
+</head>
+<body>
+
+    <script type="text/javascript">
+      document.body.innerHTML = '';
+  </script>
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0);" target="_self">Employee Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="javascript:void(0);" (click)="Home()">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active"  data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          Your Dashboard!
+        </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active"  data-bs-toggle="offcanvas" href="#offcanvasRight" role="button" aria-controls="offcanvasRight" (click)="EmpProfile()">
+            View Your Profile
+          </a>
+          </li>
+
+    </ul>
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#email" >Mail Pay Slip <i class="bi bi-envelope"></i></a>
+      </li>
+   <!---   <li class="nav-item">
+        <a class="nav-link active" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#LeaveReq" >Create Leave Request</a>
+      </li>-->
+    <li class="nav-item">
+      <a class="nav-link active" href="javascript:void(0);" (click)="logout()">Logout <i class="bi bi-power"></i></a>
+    </li>
+  </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <div class="sidehead">
+          <h3>Welcome Employee {{employeeid}}</h3>
+      </div>
+
+      <ul class="sidelist">
+          <li>
+            <a href="javascript:void(0);" (click)="EmpLeaveDetails()">Employee Leave Details</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" (click)="EmpLeaveQuota()">Employee Leave Quota</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" (click)="EmpLeaveType()">Employee Leave Type Classification</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" (click)="EmpPayList()">Employee Pay Slip List</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" (click)="FullFinal()">Full and Final Settlement</a>
+          </li>
+          </ul>
+
+
+    <div class="kaar" style="padding-left: 20px; padding-top: 50px;">
+      <div class="abimg">  <!--Single row with two columns for the grid-->
+        <div class="row" id="rowfoot">
+          <div class="col-md text-light" id='textfoot'>
+            <h5 style="padding-top: 12px;" >15 Years Of SAP Excellence,</h5>
+        </div>
+        <div class="col-md">
+                <img src="assets/logo.png" id='imgfoot' style="width:100px;height: 100px;" class="img-fluid">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header bg-dark text-light">
+
+        <h5 id="offcanvasRightLabel">Your Profile Details</h5>
+        <button type="button" class="btn-close btn-close-light text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body bg-dark text-light">
+         <div *ngIf="!EmpProfShow">
+            <div class="d-flex align-items-center">
+              <strong>Loading...</strong>
+              <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            </div>
+          </div>
+          <div *ngIf="EmpProfShow">
+            <ul>
+          <li>First Name : {{empprof.VORNA}}</li>
+          <br>
+          <li>Last Name : {{empprof.NACHN}}</li>
+          <br>
+          <li>Date OF Birth : {{empprof.GBDAT}}</li>
+          <br>
+          <li>E-Mail : {{empprof.SYSID}}</li>
+          <br>
+          <li>Gender : {{empprof.ORT01}}</li>
+          <br>
+          <li>Nationality : {{empprof.NATIO}}</li>
+          <br>
+          <li>Joining Date : {{empprof.BEGDA}}</li>
+          <br>
+          <li>Leaving Date : {{empprof.ENDDA}}</li>
+          <BR>
+          <li>Position : {{empprof.PLANS_TXT}}</li>
+          <BR>
+          <li>Cost Center : {{empprof.KOSTL}}</li>
+          <br>
+          <li>Street : {{empprof.STRAS}}</li>
+          <br>
+          <li>City Of Residence : {{empprof.ORT01}}</li>
+          <br>
+          <li>Company Code : {{empprof.BUKRS}}</li>
+          <br>
+          <li>Personnel Area : {{empprof.WERKS}}</li>
+          <br>
+          <li>PinCode : {{empprof.PSTLZ}}</li>
+          <br>
+          <li>Telephone Number : {{empprof.TELNR}}</li>
+          </ul>
+          </div>
+      </div>
+    </div>
+    <div class="modal fade" id="LeaveReq" data-bs-keyboard="false" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-dark" id="exampleModalLabel">Employee Leave Request</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-dark"> <!--Body of the modal - form-->
+            <p class="lead text-dark">Request Create Section</p>
+            <!--Placing the contents of the Modal in the form-->
+           <form [formGroup]="LeaveForm" (submit)="LeaveReq()">
+                <div class="mb-3">
+                  <label for="StartDate" class="col-form-label">Start Date:</label>
+                  <input type="date" [(ngModel)]="StartDate" class="form-control" formControlName="StartDate">
+                </div>
+                <div class="mb-3">
+                  <label for="EndDate" class="col-form-label">End Date:</label>
+                  <input type="date" [(ngModel)]="EndDate" class="form-control" formControlName="EndDate">
+                </div>
+                <div class="mb-3">
+                  <label for="Start Time" class="col-form-label">Start Time: (Optional)</label>
+                  <input type="time" [(ngModel)]="StartTime" class="form-control" formControlName="StartTime">
+                </div>
+                <div class="mb-3">
+                  <label for="End Time" class="col-form-label">End Time: (Optional)</label>
+                  <input type="time" [(ngModel)]="EndTime" class="form-control" formControlName="EndTime">
+                </div>
+                <div class="mb-3">
+                  <label for="E-Mail" class="col-form-label">Absence Hours: (Optional)</label>
+                  <input type="text" [(ngModel)]="Hours" class="form-control" formControlName="Hours">
+                </div>
+                <div class="mb-3">
+                  <label for="District" class="col-form-label">Absence Type:</label>
+                  <input type="text" [(ngModel)]="AbType" class="form-control" formControlName="AbType">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="ViewHome">
+      <div id="home">
+
+
+      <section class="p-5" id="learn">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">  <!--Single row with two columns for the grid-->
+                <div class="col-md p-5">
+                    <h3>Manage Your Personal Data and Official Processes at One Place!</h3>
+                    <br>
+
+                    <p class="lead text-light">
+                      Our Employee portal , helps you find your desired personal and official data by fetching it from the SAP ERP
+                      system and provides it to you with seamless web-service interaction. The Employee dashboard is designed and developed to help the Employees
+                      to know the complete their personal and work-related transactions in a single window with user-friendly navigations.
+                    </p>
+                <button class="btn btn-light mt-3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="bi bi-chevron-right"></i> Edit Your Details
+                </button>
+
+                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Update Your Personal Data Here!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-dark"> <!--Body of the modal - form-->
+                        <p class="lead text-dark">Employee Details Edit Section</p>
+                        <!--Placing the contents of the Modal in the form-->
+                       <form [formGroup]="editform" (submit)="EditDetails()">
+                            <div class="mb-3">
+                              <label for="first-name" class="col-form-label">First Name:</label>
+                              <input type="text" [(ngModel)]="FirstName" class="form-control" formControlName="FirstName">
+                            </div>
+                            <div class="mb-3">
+                              <label for="last-name" class="col-form-label">Last Name:</label>
+                              <input type="text" [(ngModel)]="LastName" class="form-control" formControlName="LastName">
+                            </div>
+                            <div class="mb-3">
+                              <label for="City" class="col-form-label">City:</label>
+                              <input type="text" [(ngModel)]="City" class="form-control" formControlName="City">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Telephone" class="col-form-label">Telephone:</label>
+                              <input type="text" [(ngModel)]="Telephone" class="form-control" formControlName="Telephone">
+                            </div>
+                            <div class="mb-3">
+                              <label for="E-Mail" class="col-form-label">E-mail:</label>
+                              <input type="text" [(ngModel)]="EMail" class="form-control" formControlName="EMail">
+                            </div>
+                            <div class="mb-3">
+                              <label for="District" class="col-form-label">District:</label>
+                              <input type="text" [(ngModel)]="District" class="form-control" formControlName="District">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Country" class="col-form-label">Country:</label>
+                              <input type="text" [(ngModel)]="Country" class="form-control" formControlName="Country">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Street" class="col-form-label">Street:</label>
+                              <input type="text" [(ngModel)]="Street" class="form-control" formControlName="Street">
+                            </div>
+                            <div class="mb-3">
+                              <label for="Postal Code" class="col-form-label">Postal Code:</label>
+                              <input type="text" [(ngModel)]="PostalCode" class="form-control" formControlName="PostalCode">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-md" style="padding-left: 200px;">
+                  <img src="assets/concept3-1.png" class="img-fluid" alt="" style="width: 450px; height: 400px;">
+              </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="usability ">
+      <h1 class="text-center text-light">Functionalities We Provide <i class="bi bi-lightbulb-fill align-middle"></i></h1>
+      <br>
+      <p class="text-center p-4 text-light" style="font-size: large;">
+        The Functional Motive of the Employee portal is to provide the functionalities of Human Resource
+        (HR) and Finance (FI) module access to the employee. This portal is to be designed for providing info about the
+        organization and employees, getting the pay slip as printable, leave balance and to request
+        leave. The need of Employee portal is to have quick and easy access to HR-related transactions
+        and services.
+      </p>
+      </div>
+
+
+      <div class="FunctionalCards">
+        <br>
+      <h1 class="text-center">Employee Personal Data</h1>
+      <br>
+      <p class="text-dark p-4" style="width:100%; font-size: x-large;">Employee Personal Data display Functionality is equipped with the provision to display the complete leave data of the
+       concerned employee and providing the employees with an Exclusive Emlpoyee Bot to answer an employee's queries on the go .</p>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <a target="_blank" (click)="EmpLeaveDetails()">
+                  <div class="card-body" style="background-color:orange">
+                    <h5 class="card-title text-light text-center">Overall Leave Data</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">The display leave data consists of the complete leave data in report
+                      format. The report contains the leaves availed by the employee,along with the balance leaves remaining and the different types of leaves
+                      availed in a period of time.</p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <a href="javascript:void(0);"style="text-decoration: none  ;">
+                  <div class="card-body" style="background-color:orange">
+                    <h5 class="card-title text-light text-center">Employee Connect Bot</h5>
+                    <br>
+                    <p class="card-text text-light justify-content-center">Our Employee Connect Bot  'Axios'  is designed to provide end to end connection with
+                      the employees and the HR team. It is equipped with the ability to answer to the FAQs as well as providing HR connect details for extended queries regarding office issues.</p>
+
+                  </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <BR>
+              <BR>
+
+               <BR>
+                <BR>
+                  <BR>
+              <h1 class="text-center">Employee Payroll Data</h1>
+              <br>
+              <p class="text-dark p-4" style="width:100%; font-size: x-large;">The Employee Portal is designed to help the employees have complete access to their financial data including
+               payslips and settlements between the employee and the company. This page is designed to have complete financial data
+                belonging to that employee.</p>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#invoice" style="text-decoration: none;">
+                        <div class="card-body" style="background-color:indigo">
+                          <h5 class="card-title text-light text-center">Access Salary Pay Slip</h5>
+                          <br>
+                          <p class="card-text text-light justify-content-center"> As the desired month and year will are provided by the Employee,
+                            the pay slip data is collected from the SAP ERP system,through the web-service .The collected pay slip data
+                            will then be displayed.</p>
+
+                        </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <a target="_blank" (click)="FullFinal()">
+                        <div class="card-body" style="background-color:indigo">
+                          <h5 class="card-title text-light text-center">The Full and Final Settlement</h5>
+                          <br>
+                          <p class="card-text text-light justify-content-center">In case of leaving the organization, the Employee’s final settlement form is generated.
+                            The option is enabled only during the notice period of that employee.
+                          </p>
+
+                        </div>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+
+
+      </div>
+      <section class="p-5" id="PayForm">
+        <div class="container">
+          <div class="row align-items-center justify-content-between">  <!--Single row with two columns for the grid-->
+            <div class="col-md p-5">
+                <h3>Download your Pay Slip directly as a PDF now,Saving your Time..</h3>
+                <br>
+                <p class="lead text-light">
+                  Employees can now view their pay slip on-demand, where through the web-service,the pay slip data will be collected from the
+                  corresponding Info types from the SAP ERP system. They also have the option
+                  to download the pay slip as a pdf and save it locally. Options to print and mail the pay slip are
+                  also there at the convinience of the employee.
+                </p>
+                <button class="btn btn-light mt-3" data-bs-toggle="modal" data-bs-target="#invoice"> <!--Creating a button below it-->
+                  <i class="bi bi-chevron-right"></i> Download Pay Slip  <!--Creating a chevron >  icon with the button-->
+                </button>
+
+
+                <div class="modal fade" id="invoice" data-bs-keyboard="false" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Pay Slip Generation Section</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-dark"> <!--Body of the modal - form-->
+                        <p class="lead text-dark">Enter the Details for Pay Slip Generation</p>
+                        <!--Placing the contents of the Modal in the form-->
+                        <form ngNativeValidate [formGroup]="PayForm" (submit)="PayView()">
+                            <div class="payf mb-3">
+                              <label for="Invoice-Number" class="col-form-label">Sequence Number:</label>
+                              <input type="text" [(ngModel)]="sequencenum" class="form-control" formControlName="sequencenum" required/>
+                            </div>
+                            <div class="payf mb-3">
+                              <label for="Fiscal-Year" class="col-form-label">Variant:</label>
+                              <input type="text" [(ngModel)]="variant" class="form-control" formControlName="variant" required/>
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                </div>
+                <div class="col-md">
+                  <img src="assets/concept12-1.png" class="img-fluid" alt="" style="padding-left: 50px; width:500px;">
+              </div>
+
+        </div>
+        </div>
+        </section>
+
+
+
+
+      <div class="modal fade" id="email" data-bs-keyboard="false" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="exampleModalLabel">Send Your PaySlip via E-Mail</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark"> <!--Body of the modal - form-->
+              <p class="lead text-dark">Enter the Details of the Recipient</p>
+              <!--Placing the contents of the Modal in the form-->
+              <form ngNativeValidate [formGroup]="EmailForm" (submit)="onSubmit()">
+                  <div class="eform mb-3">
+                    <label for="Name" class="col-form-label">Recipient Name:</label>
+                    <input type="text" [(ngModel)]="Name" class="form-control" formControlName="Name" required/>
+                  </div>
+                  <div class="eform mb-3">
+                    <label for="Email" class="col-form-label">E-Mail ID:</label>
+                    <input type="text" [(ngModel)]="Email" class="form-control" formControlName="Email" required/>
+                  </div>
+
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+          </form>
+        </div>
+          </div>
+        </div>
+      </div>
+      <section class="p-5 bg-light" id="MeanStack">
+  <div class="container">
+      <h2 class="text-dark text-center">Built with Mainstream Technologies</h2>
+<br>
+<br>
+      <div class="row g-3">
+<div class="col-md-6 col-lg-4">
+  <div class="card bg-light" style="border: none;">
+          <div class="card-body">
+            <a target="_blank" href="https://nodejs.org/en/about/">
+              <img src="assets/images (6).png" syle=" object-fit: cover;"alt="">
+              </a>
+          </div>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <div class="card bg-light"  style="border: none;">
+    <div class="card-body">
+      <a target="_blank" href="https://angular.io/start">
+        <img src="assets/images (7).jfif" syle=" object-fit: cover;"alt="">
+        </a>
+    </div>
+    </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card bg-light"  style="border: none;">
+  <div class="card-body">
+    <a target="_blank" href="https://www.sap.com/india/products.html">
+      <img src="assets/download (6).png" syle=" object-fit: cover;"alt="">
+      </a>
+  </div>
+</div>
+</div>
+  </div>
+  </div>
+  </section>
+      </div>
+      </div>
+      <div *ngIf="EmailShow">
+      <div class="alert alert-info" role="alert">
+        {{this.oppay}}
+      </div>
+      </div>
+
+
+    <div class="wrap">
+      <div *ngIf="empfffstatus">
+        <div *ngIf="!FullFinalShow" class="loader" style="min-height: 50vh;">
+          <div *ngIf="!FullFinalShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+            </div>
+            </div>
+          </div>
+          <div *ngIf="FullFinalShow">
+            <h1 style="text-align: center; padding-top: 20px;">Full and Final Settlement</h1>
+            <br>
+            <div class="download">
+              <button class="btn btn-primary" style = "margin-left:250px;" (click)="onClick()">Download as PDF</button>
+            </div>
+            <div class="card" id="final" style="padding:150px; border-radius: 2px;">
+
+              <h3 class="card-header" style="text-align: center; padding:15px;">Wishing You all the best in your Future Endeavours!</h3>
+              <div class="card-body">
+                <h4 class="card-title" style="text-align:center;">Complete Settlement Details</h4>
+                <br>
+                <p class="card-text" style="color: black; text-align: center;"><b>Additional Pay: {{empfull.ADD_PAY}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Company Name: {{empfull.COMPANY}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Company Code: {{empfull.COMPANYCODE}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Cost Centre: {{empfull.COSTCENTRE}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Cost Centre Description {{empfull.COSTCENTRE_DESC}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Currency: {{empfull.CURRENCY}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Deduction Amount: {{empfull.DED_AMT}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Department of Employee: {{empfull.DEPARTMENT}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Division of Employee: {{empfull.DIVISION}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>First Name: {{empfull.FIRSTNAME}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Gross Salary: {{empfull.GROSS_SAL}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Job Title :{{empfull.JOB}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Joining Date: {{empfull.JOINING_DATE}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Last Name: {{empfull.LASTNAME}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Leaves Undertaken: {{empfull.LEAVES}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Leaving Date: {{empfull.LEAVING_DATE}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Net Salary: {{empfull.NET_SAL}}</b></p>
+                <p class="card-text" style="color: black;text-align: center;"><b>Tenure Period: {{empfull.TENURE_PERIOD}}</b></p>
+                <br>
+                <div class="container">
+                  <div class="row align-items-center justify-content-center" id='rowfoot'>  <!--Single row with two columns for the grid-->
+                    <div class="col-md text-dark" id='textfoot'>
+                      <h3>Powered By</h3>
+                  </div>
+                      <div class="col-md">
+                          <img src="assets/kaar.jfif" id='imgfoot' class="img-fluid">
+                      </div>
+
+                  </div>
+              </div>
+
+              </div>
+            </div>
+          </div>
+      </div>
+
+          <div *ngIf="leavedetails_status">
+            <div *ngIf="!LeaveDetailsShow" class="loader" style="min-height: 50vh;">
+              <div *ngIf="!LeaveDetailsShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+                </div>
+                </div>
+              </div>
+              <div *ngIf="LeaveDetailsShow">
+
+                <br>
+                <h1 class="text-center">Employee Leave Details</h1>
+                <br>
+                <mat-slide-toggle (toggleChange)="changeTheme(1)" style="padding-left:20px;">Switch Mode
+                </mat-slide-toggle>
+                <br>
+            <ag-grid-angular [ngClass]="gridTheme1"  [pagination]="true"  [paginationPageSize]="paginationPageSize"
+            [paginationNumberFormatter]="paginationNumberFormatter"  [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="leavedetails.LEAVEDET" [columnDefs]="this.colDefs">
+            </ag-grid-angular>
+
+            </div>
+            <br>
+            <br>
+            <div *ngIf="LeaveDetailsShow">
+
+              <br>
+              <h1 class="text-center">Employee Remaining Leave Details</h1>
+              <br>
+              <mat-slide-toggle (toggleChange)="changeTheme(5)" style="padding-left:20px;">Switch Mode
+                </mat-slide-toggle>
+                <br>
+          <ag-grid-angular [ngClass]="gridTheme5"  [pagination]="true"  [paginationPageSize]="paginationPageSize"
+          [paginationNumberFormatter]="paginationNumberFormatter"  [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="leavedetails.REMLEAVE" [columnDefs]="this.colDefs1">
+          </ag-grid-angular>
+
+          </div>
+          </div>
+
+
+          <div *ngIf="leavequota_status">
+            <div *ngIf="!LeaveQuotaShow" class="loader" style="min-height: 50vh;">
+              <div *ngIf="!LeaveQuotaShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+                </div>
+                </div>
+              </div>
+              <div *ngIf="LeaveQuotaShow">
+
+                <br>
+                <h1 class="text-center">Employee Leave Quota</h1>
+                <br>
+                <mat-slide-toggle (toggleChange)="changeTheme(2)" style="padding-left:20px;">Switch Mode
+                </mat-slide-toggle>
+                <br>
+            <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme2" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+            [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="leavequota.LEAVEQUOTA" [columnDefs]="this.colDefs">
+
+            </ag-grid-angular>
+
+            </div>
+          </div>
+
+
+
+
+                  <div *ngIf="leavetype_status">
+                    <div *ngIf="!LeaveTypeShow" class="loader" style="min-height: 50vh;">
+                      <div *ngIf="!LeaveTypeShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+                        <strong>Loading...</strong>
+                        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+                        </div>
+                        </div>
+                      </div>
+                      <div *ngIf="LeaveTypeShow">
+
+                        <br>
+                        <h1 class="text-center">Employee Leave Classification</h1>
+                        <br>
+                        <mat-slide-toggle (toggleChange)="changeTheme(3)" style="padding-left:20px;">Switch Mode
+                        </mat-slide-toggle>
+                        <br>
+                    <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme3" [pagination]="true"  [paginationPageSize]="paginationPageSize"
+                    [paginationNumberFormatter]="paginationNumberFormatter" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="leavetype.LEAVETYPE" [columnDefs]="this.colDefs">
+
+                    </ag-grid-angular>
+
+                    </div>
+                  </div>
+
+                      <div *ngIf="paystatus">
+                        <div *ngIf="!PayListShow" class="loader" style="min-height: 50vh;">
+                          <div *ngIf="!PayListShow" class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
+                            <strong>Loading...</strong>
+                            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+
+                            </div>
+                            </div>
+                          </div>
+                          <div *ngIf="PayListShow">
+                            <br>
+                            <h1 class="text-center">Employee Pay List</h1>
+                            <br>
+                            <mat-slide-toggle (toggleChange)="changeTheme(4)" style="padding-left:20px;">Switch Mode
+                            </mat-slide-toggle>
+                            <br>
+                        <ag-grid-angular class="ag-theme-alpine" [ngClass]="gridTheme4" [pagination]="true" [paginationNumberFormatter]="paginationNumberFormatter" [paginationPageSize]="paginationPageSize" [defaultColDef]="defaultColDef" [domLayout]="domLayout" [rowData]="paylist.PAYLIST" [columnDefs]="this.colDefs">
+
+                        </ag-grid-angular>
+
+                        </div>
+                      </div>
+    </div>
+
+    <div *ngIf="ViewHome">
+      <footer class="p-5 bg-dark text-center text-light position-relative">
+        <div class="container" style="height:fit-content;">
+            <p class="lead"><strong> &copy; AK Employee Portal 2021 </strong><!--&copy - copyright symbol-->
+            </p>
+        </div>
+    </footer>
+    </div>
+    <div *ngIf="!ViewHome">
+    <footer class="p-5 bg-dark text-center text-light" style="margin-top: 50vh;">
+      <div class="container" style="height:fit-content;">
+          <p class="lead"><strong> &copy; AK Employee Portal 2021 </strong><!--&copy - copyright symbol-->
+          </p>
+      </div>
+  </footer>
+</div>
+
+</body>
+</html>

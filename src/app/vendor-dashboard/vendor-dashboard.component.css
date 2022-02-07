@@ -1,0 +1,124 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+.navbar{
+  width:auto;
+}
+#learn{
+  background: linear-gradient(to bottom, #3684dd, #0b56b8);
+  color: white;
+}
+
+.navbar ul li{
+  padding:0 10px;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+}
+#InvoiceForm{
+  background: linear-gradient(to bottom, #63df11, #06a51c);
+  color: white;
+}
+.FunctionalCards{
+  background-color:seashell;
+  padding:50px 50px;
+
+}
+
+
+.card:hover {
+  transition: 0.05s;
+  transform: scale(1.05);
+
+}
+
+#MeanStack{
+  background-color: slategrey;
+}
+
+.card-body{
+  padding:50px;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+.offcanvas h3{
+  padding:20px 0;
+}
+.offcanvas{
+  width:380px;
+}
+
+.offcanvas ul{
+  list-style-type: none;
+  padding: 0%;
+}
+
+.offcanvas ul li a{
+  text-decoration: none;
+  color: white;
+  padding: 20px 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+.offcanvas ul li a:hover{
+color: black;
+background:white;
+}
+.wrap{
+width:100%;
+overflow:auto;
+}
+
+
+#RFQ{
+  width: 3500px;
+  height: auto;
+}
+#PO{
+  width: 4000px;
+  height: auto;
+}
+#GR{
+  width: 2500px;
+  height: auto;
+}
+#InvoiceDisplay{
+  width: 2500px;
+  height: auto;
+}
+#Credit{
+  width: 3000px;
+  height: auto;
+}
+#Debit{
+  width: 3000px;
+  height: auto;
+}
+
+#payments{
+    width: 4000px;
+    height: auto;
+}
+#POItem{
+  width: 4000px;
+  height: auto;
+}
+.mat-column-column {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.invoice label::after{
+  content: "*";
+  color: red;
+}
