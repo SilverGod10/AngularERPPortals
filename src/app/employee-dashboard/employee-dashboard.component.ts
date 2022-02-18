@@ -773,15 +773,15 @@ Home(){
     this.LeaveRequestShow=false;
 }
   logout() {
-    console.log('logout');
-    if(!this.document.location.href.includes('/employee-login')){
-    let s = document.createElement('script');
-    s.setAttribute('id','');
-    }
+    
+  console.log('logout');
+
+    location.reload();
+    location.replace("http://localhost:4200/employee-login")
+
     localStorage.clear();
     this.setTitle('Login');
     this.authService.logout();
     this.router.navigate(['employee-login']);
-  }
 
 }
